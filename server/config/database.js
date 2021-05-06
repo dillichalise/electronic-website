@@ -11,8 +11,10 @@ const connection = new Sequelize(DB.NAME, DB.USERNAME, DB.PASSWORD, {
   logging: false,
 });
 
+const Models = require("../models")(connection, Sequelize);
+
 connection.sync().then(() => {
-  console.log("Database and tables created");
+  console.log(`Database and tables created.`);
 });
 
-module.exports = connection;
+module.exports = { ...Models, connection };
