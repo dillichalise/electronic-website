@@ -11,4 +11,8 @@ const all = async () => {
   });
 };
 
-module.exports = { all };
+const exists = async (username) => {
+  return User.findOne({ where: { email: username } });
+};
+
+module.exports = { all, exists };
