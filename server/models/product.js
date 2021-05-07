@@ -27,5 +27,9 @@ module.exports = (sequelize, type) => {
     image: {
       type: type.STRING,
     },
+    isFeatured: {
+      type: type.BOOLEAN,
+      defaultValue: false,
+    },
   });
 };

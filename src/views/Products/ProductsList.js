@@ -89,11 +89,11 @@ const ListProduct = () => {
                             style={{ borderRadius: "15px", height: "120px" }}
                             src={productImage}
                             title={product.name}
-                            alt={"Image"}
+                            alt={product.name}
                           />
                           <div className="py-2" />
                           <div className="text-center pb-2">
-                            <Link to={"/products/view/" + "?i=" + product.id}>
+                            <Link to={`/products/view/?i=${product.id}`}>
                               <Button>View Product</Button>
                             </Link>
                           </div>
@@ -105,7 +105,7 @@ const ListProduct = () => {
                                 textDecoration: "none",
                                 color: "#000",
                               }}
-                              to={"/products/view/" + "?i=" + product.id}
+                              to={`/products/view/?i=${product.id}`}
                             >
                               {product.name}
                             </Link>

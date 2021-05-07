@@ -23,6 +23,20 @@ const all = async (limit, offset) => {
   });
 };
 
+const featured = async () => {
+  Product.belongsTo(ProductCategory, { foreignKey: "categoryId" });
+  const searchParams = { isDeleted: false, isFeatured: true };
+  return Product.findAll({
+    where: searchParams,
+    include: [
+      {
+        model: ProductCategory,
+        attributes: ["name"],
+      },
+    ],
+  });
+};
+
 const store = async (data) => {
   return Product.create(data);
 };
@@ -38,4 +52,4 @@ const destroy = (id) => {
   return Product.update({ isDeleted: true }, { where: { id } });
 };
 
-module.exports = { all, find, store, update, destroy };
+module.exports = { all, featured, find, store, update, destroy };

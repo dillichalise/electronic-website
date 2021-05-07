@@ -19,6 +19,17 @@ const all = async (req, res) => {
 };
 
 /**
+ * Get all featured products
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+const featured = async (req, res) => {
+  const products = await productRepository.featured();
+  return respond(res, httpStatus.OK, "Featured Products List", products);
+};
+
+/**
  * Get product with provided id.
  * @param req
  * @param res
@@ -99,6 +110,7 @@ const destroy = async (req, res) => {
 
 module.exports = {
   all,
+  featured,
   find,
   store,
   update,

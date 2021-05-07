@@ -56,7 +56,7 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="col-md-6"></div>
+            <div className="col-md-6" />
           </div>
         </Container>
       </div>

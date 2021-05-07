@@ -23,7 +23,7 @@ const ProductView = (props) => {
       });
 
     server
-      .get(`/products`)
+      .get(`/featured-products`)
       .then((response) => {
         setProducts(response.data.data);
       })
@@ -85,7 +85,7 @@ const ProductView = (props) => {
                     {products.map((item, i) => {
                       return (
                         <li className="py-2">
-                          <Link to={"?i=" + item.id}>{item.name}</Link>
+                          <Link to={`?i=${item.id}`}>{item.name}</Link>
                         </li>
                       );
                     })}
