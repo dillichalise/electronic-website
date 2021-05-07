@@ -1,21 +1,51 @@
 import React, { useEffect, useState } from "react";
 import { server } from "../../config/server";
-import { Container, Col, Row, Button } from "reactstrap";
+import { Container, Col, Row, Button, CardBody } from "reactstrap";
 import BackgroundImage from "../../images/1_rev.png";
 import productImage from "../../images/product.jpg";
+import { Link } from "react-router-dom";
+import PaginationPage from "../Pagination";
+import { Card } from "@material-ui/core";
+import { getPageParams } from "../../utils/utils";
 
 const ListProduct = () => {
   const [products, setProducts] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalItems, setTotalItems] = useState(0);
+  const [offset, setOffset] = useState(0);
+  const [pageSize, setPageSize] = useState(3);
+
+  const handlePageSizeChange = (e) => {
+    setPageSize(Number(e.target.value));
+    setPage(1);
+    GetData();
+  };
+
+  const handlePageChange = (event, value) => {
+    setPage(value);
+    GetData();
+  };
+
   useEffect(() => {
+    GetData();
+  }, [pageSize, page, offset]);
+
+  const GetData = () => {
+    const params = getPageParams(page, pageSize);
     server
-      .get("/products")
+      .get("/products", { params })
       .then((response) => {
-        setProducts(response.data.data);
+        setProducts(response.data.data.pageData);
+        setTotalPages(response.data.data.totalPages);
+        setTotalItems(response.data.data.totalItems);
+        setOffset(response.data.data.offset);
       })
       .catch((err) => {
         console.log(err.response);
       });
-  }, []);
+  };
+
   return (
     <div>
       <div
@@ -39,54 +69,79 @@ const ListProduct = () => {
           </Container>
         </div>
       </div>
-      <Container className="pt-3">
-        <Row>
-          {products &&
-            products.map((product) => {
-              return (
-                <Col
-                  md={6}
-                  className="thumbnail my-4 "
-                  style={{ borderRadius: "15px" }}
-                >
-                  <Row>
-                    <Col md={4}>
-                      <div className="my-3" />
-                      <img
-                        className="img-responsive center-block"
-                        style={{ borderRadius: "15px", height: "120px" }}
-                        src={productImage}
-                        title={product.name}
-                        alt={"Image"}
-                      />
-                      <div className="py-2" />
-                      <div className="text-center pb-2">
-                        <a>
-                          <Button>View Product</Button>
-                        </a>
-                      </div>
+      <Container className="my-4">
+        <Card>
+          <CardBody>
+            <Row>
+              {products &&
+                products.map((product) => {
+                  return (
+                    <Col
+                      md={6}
+                      className="thumbnail my-4 "
+                      style={{ borderRadius: "15px" }}
+                    >
+                      <Row>
+                        <Col md={4}>
+                          <div className="my-3" />
+                          <img
+                            className="img-responsive center-block"
+                            style={{ borderRadius: "15px", height: "120px" }}
+                            src={productImage}
+                            title={product.name}
+                            alt={"Image"}
+                          />
+                          <div className="py-2" />
+                          <div className="text-center pb-2">
+                            <Link to={"/products/view/" + "?i=" + product.id}>
+                              <Button>View Product</Button>
+                            </Link>
+                          </div>
+                        </Col>
+                        <Col md={8} className="caption">
+                          <h2 style={{ width: "70%" }}>
+                            <Link
+                              style={{
+                                textDecoration: "none",
+                                color: "#000",
+                              }}
+                              to={"/products/view/" + "?i=" + product.id}
+                            >
+                              {product.name}
+                            </Link>
+                          </h2>
+                          <div className="caption">
+                            <p>
+                              <strong>Features of {product.name}</strong>
+                            </p>
+                            <div>{product.description}</div>
+                            <div style={{ height: "30px" }} />
+                            <div>
+                              Category:{" "}
+                              <span className="btn btn-outline-secondary btn-sm disabled">
+                                {product.product_category.name}
+                              </span>
+                            </div>
+                          </div>
+                        </Col>
+                      </Row>
                     </Col>
-                    <Col md={8} className="caption">
-                      <h2 style={{ width: "70%" }}>{product.name}</h2>
-                      <div className="caption">
-                        <p>
-                          <strong>Features of {product.name}</strong>
-                        </p>
-                        <div>{product.description}</div>
-                        <div style={{ height: "30px" }} />
-                        <div>
-                          Category:{" "}
-                          <span className="btn btn-outline-secondary btn-sm disabled">
-                            {product.product_category.name}
-                          </span>
-                        </div>
-                      </div>
-                    </Col>
-                  </Row>
-                </Col>
-              );
-            })}
-        </Row>
+                  );
+                })}
+            </Row>
+            <div className="bg-light">
+              <PaginationPage
+                handlePageChange={handlePageChange}
+                handlePageSizeChange={handlePageSizeChange}
+                offset={offset}
+                pageSize={pageSize}
+                totalItems={totalItems}
+                totalPages={totalPages}
+                page={page}
+              />
+            </div>
+          </CardBody>
+        </Card>
       </Container>
     </div>
   );

@@ -2,6 +2,7 @@ import ProductsList from "./views/Products/ProductsList";
 import HomePage from "./views/Home";
 import About from "./views/About";
 import Contact from "./views/Contact";
+import ProductView from "./views/Products/ProductView";
 
 const routes = [
   {
@@ -13,6 +14,11 @@ const routes = [
     path: "/products",
     exact: true,
     component: ProductsList,
+  },
+  {
+    path: "/products/view/",
+    exact: true,
+    component: ProductView,
   },
   {
     path: "/about-us",

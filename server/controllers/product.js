@@ -1,4 +1,6 @@
 const httpStatus = require("http-status");
+const { getPagingData } = require("../utils/pagination");
+const { getPagination } = require("../utils/pagination");
 const { productRepository } = require("../repositories");
 const { respond } = require("../utils/response");
 
@@ -9,9 +11,11 @@ const { respond } = require("../utils/response");
  * @returns {Promise<void>}
  */
 const all = async (req, res) => {
-  const { categoryId } = req.query;
-  const products = await productRepository.all(categoryId);
-  return respond(res, httpStatus.OK, "Products List", products);
+  const { page, pageSize } = req.query;
+  const { limit, offset } = getPagination(page, pageSize);
+  const products = await productRepository.all(limit, offset);
+  const response = await getPagingData(products, page, limit, offset);
+  return respond(res, httpStatus.OK, "Products List", response);
 };
 
 /**

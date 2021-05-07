@@ -3,15 +3,17 @@ const { Product, ProductCategory } = require("../config/database");
 /**
  * Get categoryId as parameter and returns list of products with given category Id.
  * If categoryId is null, returns all list of products
- * @param categoryId
  * @returns {Promise<Model[]>}
+ * @param limit
+ * @param offset
  */
-const all = async (categoryId) => {
+const all = async (limit, offset) => {
   Product.belongsTo(ProductCategory, { foreignKey: "categoryId" });
-  const searchParams = { isDeleted: false, categoryId };
-  if (!categoryId) delete searchParams.categoryId;
-  return Product.findAll({
+  const searchParams = { isDeleted: false };
+  return Product.findAndCountAll({
     where: searchParams,
+    limit,
+    offset,
     include: [
       {
         model: ProductCategory,
