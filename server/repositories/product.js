@@ -1,4 +1,4 @@
-const { Product } = require("../config/database");
+const { Product, ProductCategory } = require("../config/database");
 
 /**
  * Get categoryId as parameter and returns list of products with given category Id.
@@ -7,10 +7,17 @@ const { Product } = require("../config/database");
  * @returns {Promise<Model[]>}
  */
 const all = async (categoryId) => {
+  Product.belongsTo(ProductCategory, { foreignKey: "categoryId" });
   const searchParams = { isDeleted: false, categoryId };
   if (!categoryId) delete searchParams.categoryId;
   return Product.findAll({
     where: searchParams,
+    include: [
+      {
+        model: ProductCategory,
+        attributes: ["name"],
+      },
+    ],
   });
 };
 
