@@ -1,4 +1,3 @@
-import Header from "./Layout/Header";
 import ProductsList from "./views/Products/ProductsList";
 import HomePage from "./views/Home";
 import About from "./views/About";

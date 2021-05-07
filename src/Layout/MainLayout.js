@@ -1,8 +1,8 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import routes from "../routes";
-import Header from "./Header";
 import Footer from "./Footer";
+import Header from "./Header";
 
 const MainLayout = (props) => {
   return (

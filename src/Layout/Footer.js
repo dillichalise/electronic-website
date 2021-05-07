@@ -3,11 +3,12 @@ import moment from "moment";
 
 const Footer = (props) => {
   return (
-    <div className="text-center py-1 ft bg-light">
-      <p style={{ fontSize: 14 }} className="my-1 h6">
-        © {moment().format("YYYY")} | All Rights Reserved | Powered by:
+    <div className="text-center py-1 ft bg-dark">
+      <p style={{ fontSize: 14 }} className="my-1 h6 text-white">
+        © {moment().format("YYYY")} | All Rights Reserved | Created by:
         <a
-          className="text-primary"
+          style={{ textDecoration: "none" }}
+          className="text-white"
           target="_blank"
           href="https://www.chalisedilli.com.np"
         >

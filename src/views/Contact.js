@@ -1,5 +1,6 @@
 import React from "react";
 import { Col, Container, Row } from "reactstrap";
+import BackgroundImage from "../images/contactBanner.jpg";
 
 const Contact = () => {
   return (
@@ -8,8 +9,7 @@ const Contact = () => {
         id="banner-area"
         className="banner-area"
         style={{
-          backgroundImage:
-            "url(https://sinewave.com.np/wp-content/themes/custom/images/contactBanner.jpg)",
+          backgroundImage: `url(${BackgroundImage})`,
         }}
       >
         <div className="banner-text">
