@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container, Col, Row, Card, Button, CardBody } from "reactstrap";
 import BackgroundImage from "../../images/1_rev.png";
-import productImage from "../../images/product.jpg";
 import { Link } from "react-router-dom";
 import PaginationPage from "../Pagination";
 import { getPageParams } from "../../utils/utils";
@@ -84,8 +83,12 @@ const ListProduct = () => {
                           <div className="my-3" />
                           <img
                             className="img-responsive center-block"
-                            style={{ borderRadius: "15px", height: "120px" }}
-                            src={productImage}
+                            style={{
+                              borderRadius: "15px",
+                            }}
+                            src={product.image}
+                            height={"150px"}
+                            width={"200px"}
                             title={product.name}
                             alt={product.name}
                           />

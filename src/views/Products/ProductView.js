@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import query from "querystring";
 import { Card, CardBody, CardHeader, Col, Container, Row } from "reactstrap";
-import productImage from "../../images/product.jpg";
 import { Link } from "react-router-dom";
 import BackgroundImage from "../../images/1_rev.png";
 import { getFeaturedProducts, getProduct } from "../admin/api";
@@ -66,7 +65,9 @@ const ProductView = (props) => {
                 <div className="text-center">
                   <img
                     className="img-responsive"
-                    src={productImage}
+                    src={product.image}
+                    height={"180px"}
+                    width={"350px"}
                     alt={product.name}
                   />
                   <h2 className="py-2">

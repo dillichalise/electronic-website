@@ -40,7 +40,7 @@ export const getProduct = async (id) => {
 
 export const updateProduct = async (data) => {
   return server
-    .put(`${productUrl}/${data.id}`, data)
+    .put(`${productUrl}`, data)
     .then((res) => res.data)
     .catch((err) => {
       return err.response.data;

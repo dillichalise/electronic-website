@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Card, CardBody, CardHeader, Col, Container, Row } from "reactstrap";
-import productImage from "../images/product.jpg";
 import { Link } from "react-router-dom";
 import { getFeaturedProducts } from "./admin/api";
 
@@ -45,7 +44,8 @@ const TopProducts = () => {
                         <img
                           className="img-responsive center-block "
                           style={{ height: "110px" }}
-                          src={productImage}
+                          src={product.image}
+                          height={"120px"}
                           title={product.name}
                           alt={product.name}
                         />

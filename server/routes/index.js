@@ -21,7 +21,7 @@ router.get("/products", productController.all);
 router.get("/featured-products", productController.featured);
 router.post("/products", productController.store);
 router.get("/products/:id", productController.find);
-router.put("/products/:id", productController.update);
+router.put("/products", productController.update);
 router.delete("/products/:id", productController.destroy);
 
 module.exports = router;

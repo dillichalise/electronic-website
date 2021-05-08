@@ -1,3 +1,4 @@
+const sequelize = require("sequelize");
 const { Product, ProductCategory } = require("../config/database");
 
 /**
@@ -7,11 +8,20 @@ const { Product, ProductCategory } = require("../config/database");
  * @param limit
  * @param offset
  */
-const all = async (limit, offset) => {
+const all = async (limit, offset, apiUrl) => {
   Product.belongsTo(ProductCategory, { foreignKey: "categoryId" });
   const searchParams = { isDeleted: false };
   return Product.findAndCountAll({
     where: searchParams,
+    attributes: [
+      "id",
+      "name",
+      "description",
+      "categoryId",
+      "isFeatured",
+      "createdAt",
+      [sequelize.fn("concat", apiUrl, sequelize.col("image")), "image"],
+    ],
     limit,
     offset,
     include: [
@@ -23,11 +33,20 @@ const all = async (limit, offset) => {
   });
 };
 
-const featured = async () => {
+const featured = async (apiUrl) => {
   Product.belongsTo(ProductCategory, { foreignKey: "categoryId" });
   const searchParams = { isDeleted: false, isFeatured: true };
   return Product.findAll({
     where: searchParams,
+    attributes: [
+      "id",
+      "name",
+      "description",
+      "categoryId",
+      "isFeatured",
+      "createdAt",
+      [sequelize.fn("concat", apiUrl, sequelize.col("image")), "image"],
+    ],
     include: [
       {
         model: ProductCategory,
@@ -40,8 +59,19 @@ const featured = async () => {
 const store = async (data) => {
   return Product.create(data);
 };
-const find = async (id) => {
-  return Product.findOne({ where: { isDeleted: false, id } });
+const find = async (id, apiUrl) => {
+  return Product.findOne({
+    where: { isDeleted: false, id },
+    attributes: [
+      "id",
+      "name",
+      "description",
+      "categoryId",
+      "isFeatured",
+      "createdAt",
+      [sequelize.fn("concat", apiUrl, sequelize.col("image")), "image"],
+    ],
+  });
 };
 
 const update = (id, data) => {

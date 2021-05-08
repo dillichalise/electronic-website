@@ -17,7 +17,12 @@ const AddProduct = (props) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    addProduct(product).then((response) => {
+    const data = new FormData();
+    data.append("name", product.name);
+    data.append("description", product.description);
+    data.append("isFeatured", product.isFeatured);
+    data.append("file", product.image);
+    addProduct(data).then((response) => {
       if (response.status === "Success") {
         console.log(response.message);
       } else {

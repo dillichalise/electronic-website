@@ -34,7 +34,13 @@ const EditProduct = (props) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    updateProduct(product).then((response) => {
+    const data = new FormData();
+    data.append("id", product.id);
+    data.append("name", product.name);
+    data.append("description", product.description);
+    data.append("isFeatured", product.isFeatured);
+    data.append("file", product.image);
+    updateProduct(data).then((response) => {
       if (response.status === "Success") {
         console.log(response.message);
       } else {
