@@ -14,4 +14,4 @@ $ npm start
 ```
 
 - Open `server/sql/seed.sql` in your sql console and run the query for initial user setup.
-- Login with `username: admin@test.test` `password: admin12345` to access admin panel.
+-  Navigate to route `/admin` to go to Admin panel and  login with `username: admin@test.test` `password: admin`.
