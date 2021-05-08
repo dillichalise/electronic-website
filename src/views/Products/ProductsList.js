@@ -3,8 +3,9 @@ import { Container, Col, Row, Card, Button, CardBody } from "reactstrap";
 import BackgroundImage from "../../images/1_rev.png";
 import { Link } from "react-router-dom";
 import PaginationPage from "../Pagination";
-import { getPageParams } from "../../utils/utils";
+import { getHash, getPageParams } from "../../utils/utils";
 import { getProducts } from "../admin/api";
+import { toast } from "react-toastify";
 
 const ListProduct = () => {
   const [products, setProducts] = useState([]);
@@ -38,7 +39,7 @@ const ListProduct = () => {
         setTotalItems(response.data.totalItems);
         setOffset(response.data.offset);
       } else {
-        console.log(response.message);
+        toast.error(response.message);
       }
     });
   };
@@ -94,7 +95,9 @@ const ListProduct = () => {
                           />
                           <div className="py-2" />
                           <div className="text-center pb-2">
-                            <Link to={`/products/view/?i=${product.id}`}>
+                            <Link
+                              to={`/products/view/?i=${getHash(product.id)}`}
+                            >
                               <Button>View Product</Button>
                             </Link>
                           </div>

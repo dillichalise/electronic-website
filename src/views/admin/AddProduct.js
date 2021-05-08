@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Container, Form, FormGroup, Input, Label } from "reactstrap";
 import { addProduct } from "./api";
+import { toast } from "react-toastify";
 
 const AddProduct = (props) => {
   const [product, setProduct] = useState({});
@@ -24,9 +25,9 @@ const AddProduct = (props) => {
     data.append("file", product.image);
     addProduct(data).then((response) => {
       if (response.status === "Success") {
-        console.log(response.message);
+        toast.success(response.message);
       } else {
-        console.log(response.message);
+        toast.error(response.message);
       }
       props.history.push("/admin/products");
     });

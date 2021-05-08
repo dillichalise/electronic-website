@@ -8,6 +8,9 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import test1 from "../images/mark.png";
+import test2 from "../images/mary.png";
+import test3 from "../images/john.png";
 
 const GallerySlider = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -17,21 +20,21 @@ const GallerySlider = () => {
     {
       message:
         "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.",
-      image: "./assets/imgs/testimonials/mark.png",
+      image: test1,
       name: "Mark Mark",
       position: " CEO, Company One",
     },
     {
       message:
         "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.",
-      image: "./assets/imgs/testimonials/mary.png",
+      image: test2,
       name: "Mary Mary",
       position: " CEO, Company Two",
     },
     {
       message:
         "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.",
-      image: "./assets/imgs/testimonials/john.png",
+      image: test3,
       name: "John John",
       position: " CEO, Company Three",
     },
@@ -81,7 +84,7 @@ const GallerySlider = () => {
   });
 
   return (
-    <div>
+    <div className="mb-5">
       <Container>
         <Row>
           <Col md={8}>

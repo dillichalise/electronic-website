@@ -5,20 +5,20 @@ import {
   CarouselControl,
   CarouselIndicators,
 } from "reactstrap";
+import bg1 from "../images/bg1.jpg";
+import bg2 from "../images/bg2.jpg";
 
 const GallerySlider = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
   const sliders = [
     {
-      title: "Hello",
-      image:
-        "https://jssors8.azureedge.net/demos/image-slider/img/px-action-athlete-athletes-848618-image.jpg",
+      title: "Slider One",
+      image: bg1,
     },
     {
-      title: "Hello",
-      image:
-        "https://jssors8.azureedge.net/demos/image-slider/img/px-bloom-blossom-flora-65219-image.jpg",
+      title: "Slider Two",
+      image: bg2,
     },
   ];
 

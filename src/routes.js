@@ -6,6 +6,7 @@ import ProductView from "./views/Products/ProductView";
 import AdminProductList from "./views/admin/ProductList";
 import ProductAdd from "./views/admin/AddProduct";
 import ProductEdit from "./views/admin/EditProduct";
+import Login from "./views/admin/Login";
 
 const routes = [
   {
@@ -32,6 +33,11 @@ const routes = [
     path: "/contact",
     exact: true,
     component: Contact,
+  },
+  {
+    path: "/admin",
+    exact: true,
+    component: Login,
   },
   {
     path: "/admin/products",

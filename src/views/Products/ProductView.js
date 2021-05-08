@@ -4,19 +4,21 @@ import { Card, CardBody, CardHeader, Col, Container, Row } from "reactstrap";
 import { Link } from "react-router-dom";
 import BackgroundImage from "../../images/1_rev.png";
 import { getFeaturedProducts, getProduct } from "../admin/api";
+import { toast } from "react-toastify";
+import { getId } from "../../utils/utils";
 
 const ProductView = (props) => {
   const [product, setProduct] = useState({});
   const [products, setProducts] = useState([]);
-  const qs = query.parse(props.location.search);
-  const id = qs["?i"];
+  const qs = query.parse(props.location.search.slice(1));
+  const id = getId(qs.i);
 
   const GetData = () => {
     getProduct(id).then((response) => {
       if (response.status === "Success") {
         setProduct(response.data);
       } else {
-        console.log(response.message);
+        toast.error(response.message);
       }
     });
 
@@ -24,7 +26,7 @@ const ProductView = (props) => {
       if (response.status === "Success") {
         setProducts(response.data);
       } else {
-        console.log(response.message);
+        toast.error(response.message);
       }
     });
   };

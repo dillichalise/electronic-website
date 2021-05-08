@@ -7,10 +7,11 @@ import {
   Container,
   Table,
 } from "reactstrap";
-import { getPageParams } from "../../utils/utils";
+import { getHash, getPageParams } from "../../utils/utils";
 import PaginationPage from "../Pagination";
 import { Link } from "react-router-dom";
 import { deleteProduct, getProducts } from "./api";
+import { toast } from "react-toastify";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -44,7 +45,7 @@ const ProductList = () => {
         setTotalItems(response.data.totalItems);
         setOffset(response.data.offset);
       } else {
-        console.log(response.message);
+        toast.error(response.message);
       }
     });
   };
@@ -52,9 +53,9 @@ const ProductList = () => {
   const handleDelete = (id) => {
     deleteProduct(id).then((response) => {
       if (response.status === "Success") {
-        console.log(response.message);
+        toast.success(response.message);
       } else {
-        console.log(response.message);
+        toast.error(response.message);
       }
       GetData();
     });
@@ -98,7 +99,11 @@ const ProductList = () => {
                         <td>{product.name}</td>
                         <td>{product.product_category.name}</td>
                         <td>
-                          <Link to={`/admin/products/edit/?i=${product.id}`}>
+                          <Link
+                            to={`/admin/products/edit/?i=${getHash(
+                              product.id
+                            )}`}
+                          >
                             <Button
                               title={"Edit"}
                               color={"info"}

@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import query from "querystring";
 import { getProduct, updateProduct } from "./api";
 import { Button, Container, Form, FormGroup, Input, Label } from "reactstrap";
+import { toast } from "react-toastify";
+import { getId } from "../../utils/utils";
 
 const EditProduct = (props) => {
   const [product, setProduct] = useState({});
-  const qs = query.parse(props.location.search);
-  const id = qs["?i"];
+  const qs = query.parse(props.location.search.slice(1));
+  const id = getId(qs.i);
 
   const GetData = () => {
     getProduct(id).then((response) => {
@@ -42,9 +44,9 @@ const EditProduct = (props) => {
     data.append("file", product.image);
     updateProduct(data).then((response) => {
       if (response.status === "Success") {
-        console.log(response.message);
+        toast.success(response.message);
       } else {
-        console.log(response.message);
+        toast.error(response.message);
       }
       props.history.push("/admin/products");
     });
