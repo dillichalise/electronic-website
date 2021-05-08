@@ -57,7 +57,7 @@ const store = async (req, res) => {
   const product = await productRepository.store({
     name: req.body.name,
     description: req.body.description,
-    categoryId: req.body.categoryId,
+    isFeatured: req.body.isFeatured,
     image: req.body.image,
   });
   respond(res, httpStatus.OK, "Product  created successfully", product);
@@ -82,7 +82,7 @@ const update = async (req, res) => {
   await productRepository.update(id, {
     name: req.body.name,
     description: req.body.description,
-    categoryId: req.body.categoryId,
+    isFeatured: req.body.isFeatured,
     image: req.body.image,
   });
   return respond(res, httpStatus.OK, "Product  updated successfully");

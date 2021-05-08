@@ -19,6 +19,7 @@ module.exports = (sequelize, type) => {
     categoryId: {
       type: type.INTEGER,
       allowNull: false,
+      defaultValue: 1,
       references: {
         model: "product_categories",
         key: "id",

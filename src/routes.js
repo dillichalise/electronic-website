@@ -3,6 +3,9 @@ import HomePage from "./views/Home";
 import About from "./views/About";
 import Contact from "./views/Contact";
 import ProductView from "./views/Products/ProductView";
+import AdminProductList from "./views/admin/ProductList";
+import ProductAdd from "./views/admin/AddProduct";
+import ProductEdit from "./views/admin/EditProduct";
 
 const routes = [
   {
@@ -29,6 +32,21 @@ const routes = [
     path: "/contact",
     exact: true,
     component: Contact,
+  },
+  {
+    path: "/admin/products",
+    exact: true,
+    component: AdminProductList,
+  },
+  {
+    path: "/admin/products/add",
+    exact: true,
+    component: ProductAdd,
+  },
+  {
+    path: "/admin/products/edit",
+    exact: true,
+    component: ProductEdit,
   },
 ];
 

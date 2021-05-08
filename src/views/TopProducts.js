@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { Card, CardBody, CardHeader, Col, Container, Row } from "reactstrap";
-import { server } from "../config/server";
 import productImage from "../images/product.jpg";
 import { Link } from "react-router-dom";
+import { getFeaturedProducts } from "./admin/api";
 
 const TopProducts = () => {
   const [products, setProducts] = useState([]);
+
+  const GetData = () => {
+    getFeaturedProducts().then((response) => {
+      if (response.status === "Success") {
+        setProducts(response.data);
+      } else {
+        console.log(response.message);
+      }
+    });
+  };
+
   useEffect(() => {
-    server
-      .get("/featured-products")
-      .then((response) => {
-        console.log(response.data);
-        setProducts(response.data.data);
-      })
-      .catch((err) => {
-        console.log(err.response);
-      });
+    GetData();
   }, []);
   return (
     <div className="bg-light py-4">

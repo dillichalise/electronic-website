@@ -89,3 +89,11 @@ img.testimonial-thumb {
     margin-top: 0;
     margin-left: 60px;
 }
+
+.error-title {
+    font-size: 8.7rem !important;
+}
+.error-subtitle {
+    font-size: 4.5rem !important;
+}
+

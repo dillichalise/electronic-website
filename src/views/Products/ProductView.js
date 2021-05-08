@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { server } from "../../config/server";
 import query from "querystring";
 import { Card, CardBody, CardHeader, Col, Container, Row } from "reactstrap";
 import productImage from "../../images/product.jpg";
 import { Link } from "react-router-dom";
 import BackgroundImage from "../../images/1_rev.png";
+import { getFeaturedProducts, getProduct } from "../admin/api";
 
 const ProductView = (props) => {
   const [product, setProduct] = useState({});
@@ -12,24 +12,26 @@ const ProductView = (props) => {
   const qs = query.parse(props.location.search);
   const id = qs["?i"];
 
-  useEffect(() => {
-    server
-      .get(`/products/${id}`)
-      .then((response) => {
-        setProduct(response.data.data);
-      })
-      .catch((err) => {
-        console.log(err.response);
-      });
+  const GetData = () => {
+    getProduct(id).then((response) => {
+      if (response.status === "Success") {
+        setProduct(response.data);
+      } else {
+        console.log(response.message);
+      }
+    });
 
-    server
-      .get(`/featured-products`)
-      .then((response) => {
-        setProducts(response.data.data);
-      })
-      .catch((err) => {
-        console.log(err.response);
-      });
+    getFeaturedProducts().then((response) => {
+      if (response.status === "Success") {
+        setProducts(response.data);
+      } else {
+        console.log(response.message);
+      }
+    });
+  };
+
+  useEffect(() => {
+    GetData();
   }, [id]);
 
   return (

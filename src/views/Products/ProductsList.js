@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { server } from "../../config/server";
-import { Container, Col, Row, Button, CardBody } from "reactstrap";
+import { Container, Col, Row, Card, Button, CardBody } from "reactstrap";
 import BackgroundImage from "../../images/1_rev.png";
 import productImage from "../../images/product.jpg";
 import { Link } from "react-router-dom";
 import PaginationPage from "../Pagination";
-import { Card } from "@material-ui/core";
 import { getPageParams } from "../../utils/utils";
+import { getProducts } from "../admin/api";
 
 const ListProduct = () => {
   const [products, setProducts] = useState([]);
@@ -33,17 +32,16 @@ const ListProduct = () => {
 
   const GetData = () => {
     const params = getPageParams(page, pageSize);
-    server
-      .get("/products", { params })
-      .then((response) => {
-        setProducts(response.data.data.pageData);
-        setTotalPages(response.data.data.totalPages);
-        setTotalItems(response.data.data.totalItems);
-        setOffset(response.data.data.offset);
-      })
-      .catch((err) => {
-        console.log(err.response);
-      });
+    getProducts(params).then((response) => {
+      if (response.status === "Success") {
+        setProducts(response.data.pageData);
+        setTotalPages(response.data.totalPages);
+        setTotalItems(response.data.totalItems);
+        setOffset(response.data.offset);
+      } else {
+        console.log(response.message);
+      }
+    });
   };
 
   return (
