@@ -70,80 +70,88 @@ const ListProduct = () => {
       <Container className="my-4">
         <Card>
           <CardBody>
-            <Row>
-              {products &&
-                products.map((product) => {
-                  return (
-                    <Col
-                      md={6}
-                      className="thumbnail my-4 "
-                      style={{ borderRadius: "15px" }}
-                    >
-                      <Row>
-                        <Col md={4}>
-                          <div className="my-3" />
-                          <img
-                            className="img-responsive center-block"
-                            style={{
-                              borderRadius: "15px",
-                            }}
-                            src={product.image}
-                            height={"150px"}
-                            width={"200px"}
-                            title={product.name}
-                            alt={product.name}
-                          />
-                          <div className="py-2" />
-                          <div className="text-center pb-2">
-                            <Link
-                              to={`/products/view/?i=${getHash(product.id)}`}
-                            >
-                              <Button>View Product</Button>
-                            </Link>
-                          </div>
+            {products.length === 0 ? (
+              <div className="my-5">No any products found</div>
+            ) : (
+              <div>
+                <Row>
+                  {products &&
+                    products.map((product) => {
+                      return (
+                        <Col
+                          md={6}
+                          className="thumbnail my-4 "
+                          style={{ borderRadius: "15px" }}
+                        >
+                          <Row>
+                            <Col md={4}>
+                              <div className="my-3" />
+                              <img
+                                className="img-responsive center-block"
+                                style={{
+                                  borderRadius: "15px",
+                                }}
+                                src={product.image}
+                                height={"150px"}
+                                width={"200px"}
+                                title={product.name}
+                                alt={product.name}
+                              />
+                              <div className="py-2" />
+                              <div className="text-center pb-2">
+                                <Link
+                                  to={`/products/view/?i=${getHash(
+                                    product.id
+                                  )}`}
+                                >
+                                  <Button>View Product</Button>
+                                </Link>
+                              </div>
+                            </Col>
+                            <Col md={8} className="caption">
+                              <h2 style={{ width: "70%" }}>
+                                <Link
+                                  style={{
+                                    textDecoration: "none",
+                                    color: "#000",
+                                  }}
+                                  to={`/products/view/?i=${product.id}`}
+                                >
+                                  {product.name}
+                                </Link>
+                              </h2>
+                              <div className="caption">
+                                <p>
+                                  <strong>Features of {product.name}</strong>
+                                </p>
+                                <div>{product.description}</div>
+                                <div style={{ height: "30px" }} />
+                                <div>
+                                  Category:{" "}
+                                  <span className="btn btn-outline-secondary btn-sm disabled">
+                                    {product.product_category.name}
+                                  </span>
+                                </div>
+                              </div>
+                            </Col>
+                          </Row>
                         </Col>
-                        <Col md={8} className="caption">
-                          <h2 style={{ width: "70%" }}>
-                            <Link
-                              style={{
-                                textDecoration: "none",
-                                color: "#000",
-                              }}
-                              to={`/products/view/?i=${product.id}`}
-                            >
-                              {product.name}
-                            </Link>
-                          </h2>
-                          <div className="caption">
-                            <p>
-                              <strong>Features of {product.name}</strong>
-                            </p>
-                            <div>{product.description}</div>
-                            <div style={{ height: "30px" }} />
-                            <div>
-                              Category:{" "}
-                              <span className="btn btn-outline-secondary btn-sm disabled">
-                                {product.product_category.name}
-                              </span>
-                            </div>
-                          </div>
-                        </Col>
-                      </Row>
-                    </Col>
-                  );
-                })}
-            </Row>
-            <div className="bg-light">
-              <PaginationPage
-                handlePageChange={handlePageChange}
-                handlePageSizeChange={handlePageSizeChange}
-                offset={offset}
-                pageSize={pageSize}
-                totalItems={totalItems}
-                totalPages={totalPages}
-                page={page}
-              />
-            </div>
+                      );
+                    })}
+                </Row>
+                <div className="bg-light">
+                  <PaginationPage
+                    handlePageChange={handlePageChange}
+                    handlePageSizeChange={handlePageSizeChange}
+                    offset={offset}
+                    pageSize={pageSize}
+                    totalItems={totalItems}
+                    totalPages={totalPages}
+                    page={page}
+                  />
+                </div>
+              </div>
+            )}
           </CardBody>
         </Card>
       </Container>

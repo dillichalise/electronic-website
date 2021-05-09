@@ -2,10 +2,13 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
+const path = require("path");
 const config = require("./config");
 const logger = require("./config/logger");
 const ErrorHandler = require("./utils/errors");
 const baseUrl = "";
+
+app.use("/", express.static("build"));
 
 // parse json request body
 app.use(bodyParser.json());
@@ -29,6 +32,14 @@ server = app.listen(config.server_port, () => {
 
 app.use("/api", require("./routes"));
 app.use(baseUrl + "/uploads", express.static("uploads"));
+
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../build/index.html"), (err) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
 
 const exitHandler = () => {
   if (server) {
