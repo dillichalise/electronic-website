@@ -11,14 +11,13 @@ const Introduction = () => {
             <div>
               <h4>WE DELIVER HIGH QUALITY PRODUCTS</h4>
               <p>
-                Sine wave Electronics is a leading power solution company,
+                Test Electronics is a leading power solution company,
                 consistently delivering more energy and long-term peace of mind
                 with the highest performing power solution equipment available.
                 Sine Wave is the choice of more homeowners and business around
                 the country. The company was established in January 01, 2007
                 with the motto to deliver high quality power solution products.
-                Our office is located in Kantipath, Kathmandu Nepal (In front of
-                Nepal Nach ghar).
+                Our office is located in Gwarko- Imadol, Lalitpur Nepal.
               </p>
             </div>
           </div>
