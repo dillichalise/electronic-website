@@ -12,7 +12,12 @@ const login = async (req, res) => {
       "Username or password is invalid"
     );
   }
-  return respond(res, httpStatus.OK, "User authenticated successfully");
+  return respond(
+    res,
+    httpStatus.OK,
+    "User authenticated successfully",
+    authenticated
+  );
 };
 
 module.exports = { login };

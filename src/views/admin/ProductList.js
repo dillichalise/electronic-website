@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 import { deleteProduct, getProducts } from "./api";
 import { toast } from "react-toastify";
 
-const ProductList = () => {
+const ProductList = (props) => {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -33,6 +33,11 @@ const ProductList = () => {
   };
 
   useEffect(() => {
+    const isLoggedIn = window.localStorage.getItem("isAuthenticated");
+    if (!isLoggedIn) {
+      toast.info("Please login as admin to continue");
+      props.history.push("/admin");
+    }
     GetData();
   }, [pageSize, page, offset]);
 

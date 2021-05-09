@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Container, Form, FormGroup, Input, Label } from "reactstrap";
 import { addProduct } from "./api";
 import { toast } from "react-toastify";
@@ -15,6 +15,14 @@ const AddProduct = (props) => {
         break;
     }
   };
+
+  useEffect(() => {
+    const isLoggedIn = window.localStorage.getItem("isAuthenticated");
+    if (!isLoggedIn) {
+      toast.info("Please login as admin to continue");
+      props.history.push("/admin");
+    }
+  }, []);
 
   const onSubmit = (e) => {
     e.preventDefault();

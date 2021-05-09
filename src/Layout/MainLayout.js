@@ -8,14 +8,14 @@ import { ErrorPage } from "./ErrorPage";
 const MainLayout = (props) => {
   return (
     <>
-      <Header />
+      <Header {...props} />
       <Switch>
         {routes.map((route) => (
           <Route
             path={route.path}
             exact={route.exact}
             component={route.component}
-            props={props}
+            {...props}
           />
         ))}
         <Route path="/error" component={ErrorPage} />

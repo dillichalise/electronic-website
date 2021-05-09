@@ -7,14 +7,21 @@ import {
   Collapse,
   Nav,
   Container,
+  Button,
 } from "reactstrap";
 import navItems from "./navItems";
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = (props) => {
+  const qs = props.location.pathname.split("/");
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
+
+  const handleLogout = () => {
+    window.localStorage.clear();
+    props.history.push("/");
+  };
   return (
     <Navbar className="navbar-expand-lg bg-danger static-top ">
       <Container>
@@ -38,6 +45,19 @@ const Header = () => {
                 </li>
               );
             })}
+            {qs[1] === "admin" && qs.length >= 3 ? (
+              <li className="nav-item active py-1 px-2">
+                <Button
+                  onClick={handleLogout}
+                  className="nav-link text-white"
+                  size="sm"
+                  color="link"
+                  title="Logout"
+                >
+                  <i className="fa fa-power-off" />
+                </Button>
+              </li>
+            ) : null}
           </Nav>
         </Collapse>
       </Container>

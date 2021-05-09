@@ -19,6 +19,7 @@ const Login = (props) => {
     server
       .post(`/login`, data)
       .then((response) => {
+        window.localStorage.setItem("isAuthenticated", response.data.data);
         props.history.push("/admin/products");
       })
       .catch((err) => {
